@@ -1,0 +1,194 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+
+
+#registerform{
+    background-image: url("https://wallpapers.com/images/hd/violet-tones-gradient-fxt11y85uyham9mg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#loginform{
+    background-image: url("https://static.vecteezy.com/system/resources/thumbnails/020/933/072/small/abstract-blur-gradient-background-vector.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#logintable{
+    background-image: url("https://img.freepik.com/premium-photo/plain-studio-black-white-background_570543-10555.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#registertable{
+    background-image: url("https://pics.craiyon.com/2023-09-11/290ed21f9c8e48fca7e30fb09301629a.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#footerpart{
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUKprNv2Semovn_xP8Jzm9Ba2_PcPg5rXleM-miFSK6zlECz-g_66bc14CfPWExokaglA&usqp=CAU");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#admindashboard{
+   width: 100%;
+   height: 100vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction:column;
+   background-image: url("https://img.freepik.com/free-photo/background-gradient-lights_23-2149304985.jpg");
+   background-repeat: no-repeat;
+   background-size: cover;
+
+}
+
+#userdetailsbox{
+    background-image: url("https://img.freepik.com/free-vector/dark-gradient-background-with-copy-space_53876-99548.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1724025600&semt=ais_hybrid");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#productdetailsbox{
+    background-image: url("https://img.freepik.com/free-vector/dark-gradient-background-with-copy-space_53876-99548.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1724025600&semt=ais_hybrid");
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+}
+
+#orderdetailsbox{
+    background-image: url("https://img.freepik.com/free-vector/dark-gradient-background-with-copy-space_53876-99548.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1724025600&semt=ais_hybrid");
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+}
+
+#about{
+    
+    background-image: url("https://cdn.prod.website-files.com/5a9ee6416e90d20001b20038/64f5de1acb1f1c2f3242263b_Rectangle%20(79).svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#contact{
+    background-image: url("https://cdn.prod.website-files.com/5a9ee6416e90d20001b20038/64f5de1acb1f1c2f3242263b_Rectangle%20(79).svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+#cartpart{
+  width: 100%;
+  height: auto;
+  display:"flex";
+  align-items:"center";
+  justify-content:space-evenly;
+  flex-direction: "column";
+  background-image: url("https://t4.ftcdn.net/jpg/01/98/24/71/360_F_198247162_JwrVkhqowZb4NJC24156nV6QYRhsV8Qf.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+
+#productpart{
+  width: 100%;
+  
+}
+
+
+#productpart{
+  background-image: url("https://wallpapers.com/images/featured/solid-color-background-8hx8sccuk0vb8hpx.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#adminproductform{
+  background-image: url("https://img.freepik.com/premium-photo/orange-black-colors-gradient-texture-background_303085-6198.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+#adminproductregistertable{
+  background-image: url("https://i.pinimg.com/736x/ed/6d/74/ed6d74d17155263a369e69938affce40.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#productdetailsoutputbox{
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6oy0xO33bxPg7LGUBbF9O1w_-OkDk1J3T3A&s");
+  background-repeat:no-repeat;
+  background-size: cover;
+}
+
+#cardbackground{
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5IPg_y9FW4g1UX3R3qQ1Jd3AFCfbie4_8gQ&s");
+  background-repeat:no-repeat;
+  background-size: cover;
+}
+
+
+
+ @media(max-width:500px){
+
+  #headerpart .Navbar.Container{
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #headerpart.Nav{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .me-auto{
+    
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #footerpart{
+    
+    height: fit-content;
+  }
+
+#loginform{
+  width: 50%;
+  height: fit-content;
+
+}
+#logintable{
+ 
+  height: fit-content;
+}
+
+#registerform{
+ 
+  height: auto;
+}
+
+#registerform.Form{
+ 
+  height: fit-content;
+}
+
+#productpart{
+  height: fit-content;
+}
+
+#cartpart{
+  height: fit-content;
+}
+#productdetailsbox Table{
+  height: fit-content;
+}
+
+
+} 
