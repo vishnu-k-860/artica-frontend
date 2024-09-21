@@ -13,6 +13,7 @@ import Products from './page/Products';
 import Adminform from './page/admin/Adminform';
 import Productdetails from './page/admin/Productdetails';
 import Editproduct from './components/Editproduct';
+import Profile from './page/user/Profile';
 
 
 
@@ -23,6 +24,7 @@ function App() {
   return (
     <div className="App">
       <Header/>
+    
     <Routes>
      <Route path='/' element={<Homepage/>}/> 
      <Route path='/About' element={<About/>}/>
@@ -30,6 +32,7 @@ function App() {
      <Route path='/Products' element={<Products/>}/>
      <Route path='/Cart' element={<Cart/>}/>
      <Route path='/Login' element={<Login/>}/>
+     <Route path='/Profile' element={<Profile/>}/>
      <Route path='/Register' element={<Register/>} />
      <Route path='/Admindashboard' element={<Admindashboard/>} /> 
      <Route path='/Adminform' element={<Adminform/>} /> 

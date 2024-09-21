@@ -15,6 +15,8 @@ function Login() {
  console.log(details);
  
 
+ 
+
  const Submitlogin = async(e)=>{
   e.preventDefault()
   const {Email,password} = details
@@ -43,14 +45,28 @@ function Login() {
   }
  }
 
-const googlelogin = async()=>{
-  const users = JSON.parse((sessionStorage.getItem('user')))
-  console.log('userdetails',users);
+const googlelogin = async(output)=>{
+const id=output.jti,
+  firstname=output.given_name,
+  lastname=output.family_name,
+  Email=output.email,
+  profilepic=output.picture 
+  console.log(id,firstname,lastname,Email,profilepic);
 
-  const result = await googleregisterApi()
-  sessionStorage.setItem('token',result.token)
+if(!id || !firstname || !lastname || !Email || !profilepic){
+  alert("no dataa")
+}else{
+  const result = await googleregisterApi(output)
   console.log(result);
   
+  if(result.status == 200){
+    sessionStorage.setItem('user',JSON.stringify(result.data.user))
+    sessionStorage.setItem('token',result.data.token)
+    navigate('/')
+  }else{
+    alert("error")
+  }
+}
 }
 
 
@@ -94,10 +110,7 @@ const googlelogin = async()=>{
                     const output = jwtDecode(credentialResponse?.credential)
                   console.log('credentialresponse',credentialResponse);
                   console.log(output);
-                  googlelogin();
-                  sessionStorage.setItem('googleuser',JSON.stringify(output))
-                  navigate('/')
-  
+                  googlelogin(output);  
                   
                   }}
                   onError={() => {

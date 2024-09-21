@@ -40,5 +40,9 @@ export const removefromcartApi = async(user,productid,reqHeader)=>{
 }
 
 export const googleregisterApi = async(user)=>{
-    return await commonApi("POST",`${baseUrl}user/googlelogin/`,user,"")
+    return await commonApi("POST",`${baseUrl}/user/googlelogin/`,user,"")
+}
+
+export const orderitemApi = async(id,user,reqHeader)=>{
+    return await commonApi("POST",`${baseUrl}/user/orderproduct/${id}`,user,reqHeader)
 }
