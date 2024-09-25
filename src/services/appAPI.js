@@ -31,8 +31,8 @@ export const addtocartApi = async(id,product,reqHeader)=>{
     return await commonApi("POST",`${baseUrl}/user/addtocart/${id}`,product,reqHeader)
 }
 
-export const getfromcartApi = async(id,product,reqHeader)=>{
-    return await commonApi("GET",`${baseUrl}/user/displayfromcart/${id}`,product,reqHeader)
+export const getfromcartApi = async(id,reqHeader)=>{
+    return await commonApi("GET",`${baseUrl}/user/displayfromcart/${id}`,"",reqHeader)
 }
 
 export const removefromcartApi = async(user,productid,reqHeader)=>{
@@ -45,4 +45,28 @@ export const googleregisterApi = async(user)=>{
 
 export const orderitemApi = async(id,user,reqHeader)=>{
     return await commonApi("POST",`${baseUrl}/user/orderproduct/${id}`,user,reqHeader)
+}
+
+export const getorderApi = async(id,user,reqHeader)=>{
+    return await commonApi("GET",`${baseUrl}/user/getorder/${id}`,user,reqHeader)
+}
+
+export const emptycartApi = async(id,reqHeader)=>{
+    return await commonApi("DELETE",`${baseUrl}/user/emptycart/${id}`,{},reqHeader)
+}
+
+export const adminordersApi = async()=>{
+    return await commonApi("GET",`${baseUrl}/admin/orderdisplay`,"","")
+}
+
+export const forgetpasswordApi = async(user)=>{
+    return await commonApi("POST",`${baseUrl}/user/forgetpassword`,user,"")
+}
+
+export const updatepasswordApi = async(token,password)=>{
+    return await commonApi("POST",`${baseUrl}/user/updatepassword`,{token,password},"")
+}
+
+export const showuserApi = async()=>{
+    return await commonApi("GET",`${baseUrl}/admin/displayusers`,"","")
 }

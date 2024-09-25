@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Button, Card, Col, Form, Row } from 'react-bootstrap'
 import {  useNavigate } from 'react-router-dom'
 import {  addtocartApi, productDisplay } from '../services/appAPI'
@@ -7,6 +7,7 @@ import { baseUrl } from '../services/baseUrl'
 
 
 function Products() {
+
 
   const navigate = useNavigate()
 

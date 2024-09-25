@@ -7,10 +7,6 @@ import Editproduct from '../../components/Editproduct'
 
 
 function Productdetails() {
-
-
-
-
  const[displayproduct,setDisplayproduct] = useState([])
 
  useEffect(()=>{
@@ -55,6 +51,7 @@ function Productdetails() {
   return (
     <div id='productdetailsoutputbox' style={{display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column"}}>
       <div id='productdetailstable' className='mt-3 mb-3 ' style={{width:"70%"}}>
+      <h3 style={{color:"ButtonHighlight"}}>Product Details</h3> 
       <Table striped bordered hover responsive="sm">
       <thead>
         <tr>
@@ -88,8 +85,11 @@ function Productdetails() {
     </Table>
 
       </div>
-      <Link to={'/Adminform'}><Button className='w-100 mb-2  ' variant="success"  style={{color:"black"}}> <i class="fa-solid fa-plus"></i> Add Product</Button>  <br /> </Link> 
-
+     <div style={{display:"flex",flexDirection:"row"}}>
+        <Link to={'/Adminform'}><Button className='w-100 mb-2 me-2 ' variant="success"  style={{color:"black"}}> <i class="fa-solid fa-plus"></i> Add Product</Button>  <br /> </Link> 
+        <Link to={'/Admindashboard'}><Button className='w-100 mb-2 ms-2 ' variant="success"  style={{color:"black"}}>Back to Dashboard</Button>  <br /> </Link> 
+  
+     </div>
       
     </div>
   )

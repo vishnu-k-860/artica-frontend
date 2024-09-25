@@ -14,7 +14,12 @@ import Adminform from './page/admin/Adminform';
 import Productdetails from './page/admin/Productdetails';
 import Editproduct from './components/Editproduct';
 import Profile from './page/user/Profile';
-
+import Userorderdetails from './page/user/Userorderdetails';
+import Adminorders from './page/admin/Adminorders';
+import Resetpassword from './page/user/Resetpassword';
+import Forgetpassword from './page/user/Forgetpassword';
+import Userdetails from './page/admin/Userdetails';
+import { Headerprovider } from './context/header';
 
 
 function App() {
@@ -23,7 +28,8 @@ function App() {
 
   return (
     <div className="App">
-      <Header/>
+  <Headerprovider>   
+    <Header/>
     
     <Routes>
      <Route path='/' element={<Homepage/>}/> 
@@ -38,10 +44,15 @@ function App() {
      <Route path='/Adminform' element={<Adminform/>} /> 
      <Route path='/Productdetails' element={<Productdetails/>} />
      <Route path='/Editproduct' element={<Editproduct/>} />
+     <Route path='/userorderdetails' element={<Userorderdetails/>} />
+     <Route path='/userdetails' element={<Userdetails/>} />
+     <Route path='/adminorders' element={<Adminorders/>} />
+     <Route path='/resetpassword/:token' element={<Resetpassword/>} />
+     <Route path='/forgetpassword' element={<Forgetpassword/>} />
     </Routes>
       
-      <Footer/>
-      
+    <Footer/>
+  </Headerprovider>  
     </div>
   );
 }

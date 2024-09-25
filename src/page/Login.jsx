@@ -1,12 +1,15 @@
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Button, Form, Row } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import { googleregisterApi, loginAPI } from '../services/appAPI';
+import { Headercontext } from '../context/header';
 
 function Login() {
   const navigate = useNavigate()
+  const {setHeader} = useContext(Headercontext)
+
 
  const[details,setDetails] = useState({
   Email:'',
@@ -29,8 +32,9 @@ function Login() {
     console.log(result);
     
     if(result.status == 200 ){
+      setHeader(result)
       alert('login success')
-      if(result.data.existinguser.role == 1){
+      if(result?.data?.existinguser?.role == 1){
         navigate('/Admindashboard')
       }else{
         navigate('/')
@@ -60,6 +64,7 @@ if(!id || !firstname || !lastname || !Email || !profilepic){
   console.log(result);
   
   if(result.status == 200){
+    setHeader(result)
     sessionStorage.setItem('user',JSON.stringify(result.data.user))
     sessionStorage.setItem('token',result.data.token)
     navigate('/')
@@ -101,7 +106,7 @@ if(!id || !firstname || !lastname || !Email || !profilepic){
               /> <br />
              
               <Button  className='w-75' variant="success" onClick={(e)=>{Submitlogin(e)}}>Login</Button> <br />
-              <a style={{textDecoration:"none"}} href="">Forgot password</a> 
+            <Link to={'/forgetpassword'}> <a style={{textDecoration:"none"}} >Forgot password</a> </Link>
               <h6>New User: <Link to={'/Register'}> <a style={{textDecoration:"none"}} href="">Register</a></Link> </h6>
               <Row style={{display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column"}}>
                 

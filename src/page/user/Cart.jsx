@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Card, Col, Modal, Row, Toast } from 'react-bootstrap'
-import {  getfromcartApi, orderitemApi, removefromcartApi } from '../../services/appAPI'
+import {  emptycartApi, getfromcartApi, orderitemApi, removefromcartApi } from '../../services/appAPI'
 import { baseUrl } from '../../services/baseUrl'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import Marquee from 'react-fast-marquee'
 
 function Cart({item}) {
   const navigate = useNavigate()
@@ -16,36 +17,42 @@ function Cart({item}) {
   const[displayproduct,setDisplayproduct] = useState([]);
   const[sum,setSum] = useState(0)
 
-  const[responseid,setResponseid] = useState("")
-  const[responsestate,setResponsestate] = useState([])
-
       useEffect(()=>{
         productDisplay()
-       },[])
+       },[displayproduct])
 
 
    const productDisplay = async()=>{ 
+    const token = sessionStorage.getItem('token')
+
     const user = JSON.parse(sessionStorage.getItem('user'))
-    const result = await getfromcartApi(user._id)
+
+    if(token){
+      var reqHeader = {
+          "Content-Type" : "application/json",
+        "Authorization" : `Bearer ${token}`
+      }
+    const result = await getfromcartApi(user._id,reqHeader)
     setDisplayproduct(result?.data?.items)
 
+   }else{
+    alert('please login')
+    navigate('/Login')
    }
-console.log(displayproduct);
-
+  }
+  
 const totalsum=()=>{ 
-  if(displayproduct.length>0){
-    var total = displayproduct.map(n=> Number(n.productid.productprice))
+  if(displayproduct?.length>0){
+    var total = displayproduct?.map(n=> Number(n.productid.productprice))
     console.log(total);
     setSum(total.reduce((n1,n2)=>(n1+n2)))
 
   }}
   
-
+   
   useEffect(()=>{
     totalsum()
  },[displayproduct])
-
-console.log(sum);
 
 
 const cartdelete = async(productid)=>{
@@ -68,7 +75,6 @@ const cartdelete = async(productid)=>{
  }else{
   alert('error')
  }
- console.log(displayproduct);
  
  }else{
   alert('not logged in')
@@ -114,25 +120,16 @@ const Razorpayorder = async (amount)=>{
     "Authorization" : `Bearer ${token}`
   },
   data:data
-
-
 }
 
-
-
 axios.request(config).then((response)=>{
-  console.log(JSON.stringify(response.data));
-  handlerazorpayscreen(response.data.amount)
-  
+  console.log(JSON.stringify(response?.data));
+  handlerazorpayscreen(response?.data?.amount)  
 })
-  
 .catch((error)=>{
   console.log("error ",error);
-  
 })
 
-
- 
 const handlerazorpayscreen = async(amount)=>{
   const res = await loadScript("https:/checkout.razorpay.com/v1/checkout.js")
 if(!res){
@@ -173,21 +170,26 @@ const placeOrder = async(id)=>{
         "Authorization" : `Bearer ${token}`
       }
     
+
+    const reqBody = {
+      paymentid: id,
+      cart: displayproduct,
+      amount:sum
+    }
     const user =JSON.parse(sessionStorage.getItem('user')) 
 
-    const reqBody = new FormData()
-    reqBody.append("paymentid",id)
-    displayproduct.forEach(items =>{
-      reqBody.append(
-        "cart",items.productid
-      )
-    })
-    reqBody.append("amount",sum)
-    
     const result = await orderitemApi(user._id,reqBody,reqHeader)
     
     if(result.status == 200){
       alert('order succeess')
+      console.log('userid::::_id',user._id);
+      
+      console.log('first log',user._id);
+      await emptycartApi(user._id,reqHeader)
+      console.log('second log',user.userid);
+      
+      navigate('/userorderdetails')
+    
     }else{
      console.log(Error); 
     }
@@ -204,6 +206,7 @@ return (
 <Button style={{margin:"5px"}} variant="primary" onClick={handleShow}>
         Place Order
       </Button>
+ <Link to={'/userorderdetails'}> <Button>Order Details</Button></Link>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -221,33 +224,34 @@ return (
       </Modal>
 </Col>
   {
-    // displayproduct.length>0?
-  displayproduct.map((item,index)=>
+  displayproduct?.length>0?
+  displayproduct?.map((item,index)=>(
    <Col lg={3} md={3} sm={12} >
                  <Card id='cardbackground' key={index} style={{width: "300px",height:"450px",margin:"5px",color:"black"}} >
                   <Card.Img style={{width:"100%",height:"250px"}}  src={item?`${baseUrl}/uploads/${item.productid.productimage}`:""} alt="image" /> 
                   <Card.Body>
-                    <Card.Title>{item.productid.producttitle}</Card.Title>
+                    <Card.Title>{item?.productid.producttitle}</Card.Title>
                     <Card.Text>
-                   {item.productid.productdescription}
+                   {item?.productid.productdescription}
                   </Card.Text>
                     <Card.Text>
-                      {item.productid.productprice}
+                      {item?.productid.productprice}
                     </Card.Text>
                       <Button  onClick={()=>cartdelete(item?.productid._id)}>
                       <i class="fa-solid fa-trash"></i>
                       </Button>
-                      {responseid && <p>{responseid}</p>}
                   </Card.Body>
                 </Card>
               </Col>
-            ) 
-            // :"Nothing to display"            
+            )):<Marquee>
+            Nothing to display
+          </Marquee>         
 } 
    
    </Row>
       </div>
     </div>
+
   )
 }
 
