@@ -29,8 +29,7 @@ function App() {
   return (
     <div className="App">
   <Headerprovider>   
-    <Header/>
-    
+  <Header/>
     <Routes>
      <Route path='/' element={<Homepage/>}/> 
      <Route path='/About' element={<About/>}/>

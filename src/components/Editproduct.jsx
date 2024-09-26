@@ -2,10 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap';
 import { baseUrl } from '../services/baseUrl';
 import { updateproduct } from '../services/appAPI';
-import { Headercontext } from '../context/header';
 
 function Editproduct({products}) {
-  const {header} = useContext(Headercontext)
  
     const [show, setShow] = useState(false);
 

@@ -42,10 +42,10 @@ function Register() {
   return (
     <div>
       <div id="registerform" style={{width:"100%",height:"100vh" ,display:"flex",alignItems:"center",justifyContent:"center"}}>
-        <div id="registertable" style={{width:"50%",height:"90vh",display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column",border:"1px solid",borderRadius:"15px",boxShadow:"1px 1px 1px 1px"}}>
+        <div id="registertable" style={{width:"50%",height:"90vh",display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column",border:"1px solid",borderRadius:"20px",boxShadow:"1px 1px 1px 1px"}}>
           <Form className='w-75'>
-            <h3>Register</h3>
-          <Form.Label  name="firstname">First name</Form.Label>
+            <h3 style={{color:"#021670",fontFamily:"revert",fontWeight:"30px"}}  >REGISTER</h3>
+          <Form.Label style={{color:"#021670"}}  name="firstname">First name</Form.Label>
               <Form.Control name="firstname" 
                 required
                 type="text"
@@ -55,7 +55,7 @@ function Register() {
                 
               /> 
               
-              <Form.Label >Last name</Form.Label>
+              <Form.Label style={{color:"#021670"}} >Last name</Form.Label>
               <Form.Control name="lastname" 
                 required
                 type="text"
@@ -65,7 +65,7 @@ function Register() {
             
               /> 
               
-              <Form.Label >E mail</Form.Label>
+              <Form.Label style={{color:"#021670"}} >E mail</Form.Label>
               <Form.Control name="email" 
                 required
                 type="email"
@@ -74,7 +74,7 @@ function Register() {
                 onChange={(e)=>{setValues({...values,Email:e.target.value})}}
               /> 
               
-              <Form.Label >phone number</Form.Label>
+              <Form.Label style={{color:"#021670"}} >phone number</Form.Label>
               <Form.Control name="phonenumber" 
                 required
                 type="text"
@@ -83,7 +83,7 @@ function Register() {
                 onChange={(e)=>{setValues({...values,phonenumber:e.target.value})}}
               /> 
               
-              <Form.Label>address</Form.Label>
+              <Form.Label style={{color:"#021670"}}>address</Form.Label>
               <Form.Control name='address'
               type="textarea" 
               placeholder="enter address"
@@ -91,7 +91,7 @@ function Register() {
               onChange={(e)=>{setValues({...values,address:e.target.value})}}
               />
         
-              <Form.Label >Password</Form.Label>
+              <Form.Label style={{color:"#021670"}} >Password</Form.Label>
               <Form.Control name="password" 
                 required
                 type="password"
@@ -101,8 +101,8 @@ function Register() {
               /> 
              
               <br />
-              <Button className='w-100' variant="success" onClick={(e)=>display(e)} >Register</Button>
-              <h6>Already have an account: <Link to={'/Login'}> <a style={{textDecoration:"none"}} href="">Login</a></Link> </h6>
+              <Button className='w-100' variant="success" onClick={(e)=>display(e)} >Register</Button> <br />
+              <h6 style={{color:"#560359"}}>Already have an account: <Link to={'/Login'}> <a style={{textDecoration:"none"}} href="">Login</a></Link> </h6>
               
     
           </Form>

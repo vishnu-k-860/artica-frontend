@@ -3,27 +3,25 @@
     padding: 0px;
 }
 
-
-
 #registerform{
-    background-image: url("https://wallpapers.com/images/hd/violet-tones-gradient-fxt11y85uyham9mg.jpg");
+    background-image: url("https://www.inprocorp.com/globalassets/color--finish-images/standard-solid/englishgreen.jpg?width=500&height=500&mode=crop");
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 #loginform{
-    background-image: url("https://static.vecteezy.com/system/resources/thumbnails/020/933/072/small/abstract-blur-gradient-background-vector.jpg");
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGxP6R4W65MAXSgt2QrWtam-B8IdohbHZyEA&s");
     background-repeat: no-repeat;
     background-size: cover;
 }
 #logintable{
-    background-image: url("https://img.freepik.com/premium-photo/plain-studio-black-white-background_570543-10555.jpg");
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPlvVFNdz5zCApsAJZG5qV4mt6cxKbbl2Xvw&s");
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 #registertable{
-    background-image: url("https://pics.craiyon.com/2023-09-11/290ed21f9c8e48fca7e30fb09301629a.webp");
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbvaduftsWheYTwL3tOpzGszPdLalvTTWPWg&s");
     background-repeat: no-repeat;
     background-size: cover;
 }

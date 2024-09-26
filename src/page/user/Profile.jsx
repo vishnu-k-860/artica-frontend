@@ -5,12 +5,14 @@ import { baseUrl } from '../../services/baseUrl'
 
 function Profile({users}) {
 
+  
 const[editprofile,setEditprofile]= useState({
   firstname:users?.firstname,
   phonenumber:users?.phonenumber,
   address:users?.address,
   profilepic:""
 })
+console.log(editprofile);
 
 const[tokens,setTokens] = useState()
  
@@ -67,6 +69,7 @@ const result = await editprofileApi(user?._id,reqBody,reqHeader)
   return (
     <div >
         <div id='profile' style={{width:"100%",height:"70vh"}}>
+          
         <Form style={{width:"100%",height:"100%",display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column"}}>
 
         <input type="file" style={{display:"none"}} onChange={(e)=>{setEditprofile({...editprofile,profilepic:e.target.files[0]})}}/>
@@ -79,7 +82,7 @@ const result = await editprofileApi(user?._id,reqBody,reqHeader)
                 placeholder="email"
               /> 
               <Form.Label >Username</Form.Label>
-              <Form.Control className='w-25' name="product-title" 
+              <Form.Control className='w-25' 
                 required
                 value={editprofile?.firstname} 
                 type="text"
@@ -88,7 +91,7 @@ const result = await editprofileApi(user?._id,reqBody,reqHeader)
 
               />
               <Form.Label >Phone Number</Form.Label>
-              <Form.Control className='w-25' name="product-title" 
+              <Form.Control className='w-25'  
                 required
                 value={editprofile?.phonenumber} 
                 type="text"
@@ -96,12 +99,10 @@ const result = await editprofileApi(user?._id,reqBody,reqHeader)
                 onChange={(e)=>{setEditprofile({...editprofile,phonenumber:e.target.value})}}
                />
                <Form.Label >Address</Form.Label>
-              <Form.Control className='w-25' name="product-title" 
+              <Form.Control className='w-25'  
                 required
                 value={editprofile?.address} 
                 onChange={(e)=>{setEditprofile({...editprofile,address:e.target.value})}}
-
-
                 type="text"
                 placeholder="Address"/> <br />
 

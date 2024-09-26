@@ -40,7 +40,7 @@ const Submitlogout = async()=>{
 
   useEffect(()=>{
     productDisplay()
-   },[displayproduct,header])
+   },[header])
 
 
 const productDisplay = async()=>{ 
