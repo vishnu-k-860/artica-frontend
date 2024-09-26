@@ -58,8 +58,7 @@ setDisplayproduct(result?.data?.items)
 
 }
 }
-console.log('cart items here',displayproduct);
-console.log('count here',cartcount);
+
 
 
 

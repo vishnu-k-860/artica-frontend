@@ -70,3 +70,11 @@ export const updatepasswordApi = async(token,password)=>{
 export const showuserApi = async()=>{
     return await commonApi("GET",`${baseUrl}/admin/displayusers`,"","")
 }
+
+// export const updateproduct = async(id,product,reqHeader)=>{
+//     return await commonApi("PUT",`${baseUrl}/admin/productupdate/${id}`,product,reqHeader)
+// }
+
+export const editprofileApi = async(id,user,reqHeader)=>{
+    return await commonApi("PUT",`${baseUrl}/user/editprofile/${id}`,user,reqHeader)
+}
