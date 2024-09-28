@@ -5,11 +5,13 @@ import { Button, Form, Row } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import { googleregisterApi, loginAPI } from '../services/appAPI';
 import { Headercontext } from '../context/header';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
   const navigate = useNavigate()
   const {setHeader} = useContext(Headercontext)
-
+  
 
  const[details,setDetails] = useState({
   Email:'',
@@ -24,7 +26,7 @@ function Login() {
   e.preventDefault()
   const {Email,password} = details
   if(!Email || !password){
-    alert('please fill the details')
+   toast.warning("please fill the details")
   }else{
     const result = await loginAPI(details)
     sessionStorage.setItem('user',JSON.stringify(result.data.existinguser))
@@ -33,15 +35,16 @@ function Login() {
     
     if(result.status == 200 ){
       setHeader(result)
-      alert('login success')
+      toast.success('login success')
       if(result?.data?.existinguser?.role == 1){
         navigate('/Admindashboard')
+        
       }else{
         navigate('/')
       }
     }else{
       if(result.status == 404){
-        alert('incorrect input')
+        
       }else{
         console.log(result);  
       }
@@ -130,6 +133,20 @@ if(!id || !firstname || !lastname || !Email || !profilepic){
         </div>
         
       </div>
+      <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
+
+<ToastContainer />
     </div>
   )
 }

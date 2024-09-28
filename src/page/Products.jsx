@@ -15,7 +15,7 @@ function Products() {
   const[sortproduct,setSortproduct] = useState([]);
 
   const[productcount,setProductcount] = useState(1)
-    console.log(productcount);
+   
 
 
   useEffect(()=>{
@@ -27,7 +27,7 @@ function Products() {
     setDisplayproduct(result.data)
     setSortproduct(result.data)
   }
-  console.log(displayproduct);
+  
   
   const searchoutput = (name)=>{
     setDisplayproduct(sortproduct.filter(item=>item.productcategory.includes(name)))
@@ -36,7 +36,7 @@ function Products() {
 
 
   const addcart = async(productid)=>{
-    console.log(productid);
+  
     const token = sessionStorage.getItem('token')
     if(token){
     var reqHeader ={

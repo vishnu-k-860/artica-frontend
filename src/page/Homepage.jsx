@@ -15,7 +15,7 @@ function Homepage() {
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <img style={{width:"100%",height:"80vh"}}  src="https://media.istockphoto.com/id/541835638/vector/paper-plane-on-blue-sky.jpg?s=612x612&w=0&k=20&c=Ai2240CuBgPyio37mqrAU7SgtmDvTmY5hwEA1Ltuk4k=" alt="" />
+          <img style={{width:"100%",height:"80vh"}}  src="https://img.freepik.com/free-photo/vibrant-colors-flow-abstract-wave-pattern-generated-by-ai_188544-9781.jpg" alt="" />
           <Carousel.Caption>
             <h3 style={{color:"#00927e",fontFamily:"monospace",fontWeight:"bold",fontSize:"50px"}}>Creative Materials</h3>
             <p style={{color:"black",fontFamily:"monospace",fontWeight:"bold",fontSize:"30px"}}>Try your own products.</p>

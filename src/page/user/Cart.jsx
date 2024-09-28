@@ -17,34 +17,34 @@ function Cart({item}) {
   const[displayproduct,setDisplayproduct] = useState([]);
   const[sum,setSum] = useState(0)
 
-      useEffect(()=>{
-        productDisplay()
-       },[displayproduct])
+  useEffect(() => {
+    productDisplay()
+  }, [displayproduct])
 
+    const productDisplay = async () => {
+      const token = sessionStorage.getItem('token')
+      const user = JSON.parse(sessionStorage.getItem('user'))
 
-   const productDisplay = async()=>{ 
-    const token = sessionStorage.getItem('token')
-
-    const user = JSON.parse(sessionStorage.getItem('user'))
-
-    if(token){
-      var reqHeader = {
-          "Content-Type" : "application/json",
-        "Authorization" : `Bearer ${token}`
+      if (!token || !user) {
+        alert('Please login')
+        return navigate('/Login')
+      }else{
+        const result = await getfromcartApi(user?._id)
+        if (result?.status === 200) {
+          setDisplayproduct(result?.data?.items)
+        }        
       }
-    const result = await getfromcartApi(user._id,reqHeader)
-    setDisplayproduct(result?.data?.items)
 
-   }else{
-    alert('please login')
-    navigate('/Login')
-   }
-  }
+      
+    }
+
+ 
+  
   
 const totalsum=()=>{ 
   if(displayproduct?.length>0){
-    var total = displayproduct?.map(n=> Number(n.productid.productprice))
-    console.log(total);
+    var total = displayproduct?.map(n=> Number(n?.productid?.productprice))
+   
     setSum(total.reduce((n1,n2)=>(n1+n2)))
 
   }}
@@ -66,7 +66,7 @@ const cartdelete = async(productid)=>{
         "Content-Type" : "application/json",
       "Authorization" : `Bearer ${token}`
     }
- const remove = await removefromcartApi(users._id,productid,reqHeader)
+ const remove = await removefromcartApi(users?._id,productid,reqHeader)
 
  if(remove.status == 200){
   alert("item deleted")
@@ -157,7 +157,6 @@ paymentobject.open()
 }
 }
 
-console.log(displayproduct);
 
 
 const placeOrder = async(id)=>{
@@ -182,11 +181,8 @@ const placeOrder = async(id)=>{
     
     if(result.status == 200){
       alert('order succeess')
-      console.log('userid::::_id',user._id);
       
-      console.log('first log',user._id);
       await emptycartApi(user._id,reqHeader)
-      console.log('second log',user.userid);
       
       navigate('/userorderdetails')
     
@@ -228,14 +224,14 @@ return (
   displayproduct?.map((item,index)=>(
    <Col lg={3} md={3} sm={12} >
                  <Card id='cardbackground' key={index} style={{width: "300px",height:"450px",margin:"5px",color:"black"}} >
-                  <Card.Img style={{width:"100%",height:"250px"}}  src={item?`${baseUrl}/uploads/${item.productid.productimage}`:""} alt="image" /> 
+                  <Card.Img style={{width:"100%",height:"250px"}}  src={item?`${baseUrl}/uploads/${item.productid?.productimage}`:""} alt="image" /> 
                   <Card.Body>
-                    <Card.Title>{item?.productid.producttitle}</Card.Title>
+                    <Card.Title>{item?.productid?.producttitle}</Card.Title>
                     <Card.Text>
-                   {item?.productid.productdescription}
+                   {item?.productid?.productdescription}
                   </Card.Text>
                     <Card.Text>
-                      {item?.productid.productprice}
+                      {item?.productid?.productprice}
                     </Card.Text>
                       <Button  onClick={()=>cartdelete(item?.productid._id)}>
                       <i class="fa-solid fa-trash"></i>
@@ -244,7 +240,7 @@ return (
                 </Card>
               </Col>
             )):<Marquee>
-            Nothing to display
+            Cart Is Empty
           </Marquee>         
 } 
    

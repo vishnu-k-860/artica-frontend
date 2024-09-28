@@ -28,7 +28,7 @@ function Editproduct({products}) {
 
   useEffect(()=>{
    if(editproduct.productimage){
-    setPreview(URL.createObjectURL(editproduct.productimage))   
+    setPreview(URL.createObjectURL(editproduct?.productimage))   
    }
   },[editproduct.productimage])
 

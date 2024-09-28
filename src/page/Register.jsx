@@ -1,10 +1,31 @@
 import React, { useState } from 'react'
-import { Button, Form, InputGroup } from 'react-bootstrap'
+import { Button, Form, InputGroup, Modal } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
-import { registerAPI } from '../services/appAPI'
+import { registerAPI, verifyotpApi } from '../services/appAPI'
+import Resend from './user/Resend'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function Register() {
   const navigate = useNavigate()
+
+ 
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [editbutton,seteditButton] = useState(false)
+
+  const[value,setvalue] = useState({
+    Email:'',
+    otp:''
+  })
+
+ console.log(value);
+ 
+const [data,setData] = useState('')
 
   const[values,setValues] = useState({
     firstname:'',
@@ -21,15 +42,16 @@ function Register() {
     e.preventDefault()
     const {firstname,lastname,Email,phonenumber,address,password} = values
     if(!firstname || !lastname || !Email || !phonenumber || !address || !password  ){
-      alert("please fill the form")
+     toast.warning("please fill the form")
     }else{
+
       const result = await registerAPI(values)
+      console.log(result);
       if(result.status == 200){
-        alert("Registration Success")
-        navigate('/login')
+        setShow(true)
       }else{
          if(result.status == 406){
-          alert('already exist')
+          toast.warning("Already exist")
          }else{
           console.log(result);
           
@@ -38,6 +60,33 @@ function Register() {
 
     }
   }
+
+
+const verify = async(e)=>{
+  const{Email,otp} = value
+ 
+  if(!Email || !otp){
+    alert('please fill the details')
+  }else{
+    const output = await verifyotpApi(value)
+    console.log('out',output);
+    
+    if(output.status === 200){
+      alert('verification success')
+      
+      navigate('/Login')
+
+    }else{       
+        alert('Otp expired')
+        seteditButton(true)
+      }
+    } 
+  }
+
+
+
+
+
 
   return (
     <div>
@@ -106,9 +155,60 @@ function Register() {
               
     
           </Form>
+
+          
+          <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Enter OTP</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <Form.Control name="otp"  
+                type="email"
+                placeholder="enter email"
+                value={value.Email}
+                onChange={(e)=>{setvalue({...value,Email:e.target.value})}}
+          /> 
+        <Form.Control name="otp"  
+                type="text"
+                placeholder="enter otp"
+                value={value.otp}
+                onChange={(e)=>{setvalue({...value,otp:e.target.value})}}
+          />
+          
+          </Modal.Body>
+        <Modal.Footer>
+       
+          <Button variant="primary" onClick={(e)=>verify(e)}>
+            Submit
+          </Button>
+
+          <Resend/>
+      
+           
+        
+        </Modal.Footer>
+      </Modal>
+
         </div>
         
       </div>
+      <ToastContainer
+position="top-center"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+/>
     </div>
    
   )

@@ -20,6 +20,8 @@ import Resetpassword from './page/user/Resetpassword';
 import Forgetpassword from './page/user/Forgetpassword';
 import Userdetails from './page/admin/Userdetails';
 import { Headerprovider } from './context/header';
+import Resend from './page/user/Resend';
+import Pdfdownload from './page/user/Pdfdownload';
 
 
 function App() {
@@ -30,6 +32,8 @@ function App() {
     <div className="App">
   <Headerprovider>   
   <Header/>
+ 
+  
     <Routes>
      <Route path='/' element={<Homepage/>}/> 
      <Route path='/About' element={<About/>}/>
@@ -47,7 +51,9 @@ function App() {
      <Route path='/userdetails' element={<Userdetails/>} />
      <Route path='/adminorders' element={<Adminorders/>} />
      <Route path='/resetpassword/:token' element={<Resetpassword/>} />
+     <Route path='/resendotp' element={<Resend/>} />
      <Route path='/forgetpassword' element={<Forgetpassword/>} />
+     <Route path='/pdfdownload' element={<Pdfdownload/>} />
     </Routes>
       
     <Footer/>

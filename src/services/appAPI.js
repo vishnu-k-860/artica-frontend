@@ -31,8 +31,8 @@ export const addtocartApi = async(id,product,reqHeader)=>{
     return await commonApi("POST",`${baseUrl}/user/addtocart/${id}`,product,reqHeader)
 }
 
-export const getfromcartApi = async(id,reqHeader)=>{
-    return await commonApi("GET",`${baseUrl}/user/displayfromcart/${id}`,"",reqHeader)
+export const getfromcartApi = async(id,product,reqHeader)=>{
+    return await commonApi("GET",`${baseUrl}/user/displayfromcart/${id}`,product,reqHeader)
 }
 
 export const removefromcartApi = async(user,productid,reqHeader)=>{
@@ -71,10 +71,15 @@ export const showuserApi = async()=>{
     return await commonApi("GET",`${baseUrl}/admin/displayusers`,"","")
 }
 
-// export const updateproduct = async(id,product,reqHeader)=>{
-//     return await commonApi("PUT",`${baseUrl}/admin/productupdate/${id}`,product,reqHeader)
-// }
 
 export const editprofileApi = async(id,user,reqHeader)=>{
     return await commonApi("PUT",`${baseUrl}/user/editprofile/${id}`,user,reqHeader)
+}
+
+export const verifyotpApi = async(user)=>{
+    return await commonApi("POST",`${baseUrl}/user/verifyotp`,user,"")
+}
+
+export const resendotpApi = async(user)=>{
+    return await commonApi("POST",`${baseUrl}/user/resendotp`,user,"")
 }

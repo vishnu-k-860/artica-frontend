@@ -1,25 +1,30 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Button, Form, Image } from 'react-bootstrap'
 import { editprofileApi } from '../../services/appAPI'
 import { baseUrl } from '../../services/baseUrl'
+import { useNavigate } from 'react-router-dom'
+import { Headercontext } from '../../context/header'
 
 function Profile({users}) {
 
-  
+const {header,setHeader} = useContext(Headercontext)
+
+const navigate = useNavigate()
+
 const[editprofile,setEditprofile]= useState({
-  firstname:users?.firstname,
-  phonenumber:users?.phonenumber,
-  address:users?.address,
+  Email:"",
+  firstname:"",
+  phonenumber:"",
+  address:"",
   profilepic:""
 })
-console.log(editprofile);
 
 const[tokens,setTokens] = useState()
- 
 const[preview,setPreview] = useState(null)
 
+
 useEffect(()=>{
- if(editprofile.profilepic){
+ if(editprofile?.profilepic){
   setPreview(URL.createObjectURL(editprofile.profilepic))   
  }
 },[editprofile?.profilepic])
@@ -30,6 +35,20 @@ useEffect(()=>{
 },[])
 const user = JSON.parse(sessionStorage.getItem('user'))
  console.log('userhereeee',user);
+ useEffect(()=>{
+  if (user) {
+    setEditprofile({
+      Email:user?.Email,
+      firstname: user?.firstname,
+      phonenumber: user?.phonenumber,
+      address: user?.address,
+      profilepic: ""
+    });
+  }
+},[header]);
+console.log('usersareherereee',user);
+
+
  
 const handleedit= async(e)=>{
   const{firstname,phonenumber,address,profilepic}= editprofile
@@ -54,7 +73,9 @@ const handleedit= async(e)=>{
 
 const result = await editprofileApi(user?._id,reqBody,reqHeader)
     if(result.status == 200){
+      sessionStorage.setItem('user',JSON.stringify(result.data))
       alert('Update success')
+      navigate('/')
     }
     console.log(result);
     
@@ -80,6 +101,8 @@ const result = await editprofileApi(user?._id,reqBody,reqHeader)
                 required 
                 type="email"
                 placeholder="email"
+                defaultValue={editprofile?.Email}
+                readOnly
               /> 
               <Form.Label >Username</Form.Label>
               <Form.Control className='w-25' 
@@ -87,7 +110,7 @@ const result = await editprofileApi(user?._id,reqBody,reqHeader)
                 value={editprofile?.firstname} 
                 type="text"
                 placeholder="username"
-                onChange={(e)=>{setEditprofile({...editprofile,firstname:e.target.value})}}
+                onChange={(e)=>setEditprofile({...editprofile,firstname:e.target.value})}
 
               />
               <Form.Label >Phone Number</Form.Label>
@@ -96,13 +119,13 @@ const result = await editprofileApi(user?._id,reqBody,reqHeader)
                 value={editprofile?.phonenumber} 
                 type="text"
                 placeholder="Phone number"
-                onChange={(e)=>{setEditprofile({...editprofile,phonenumber:e.target.value})}}
+                onChange={(e)=>setEditprofile({...editprofile,phonenumber:e.target.value})}
                />
                <Form.Label >Address</Form.Label>
               <Form.Control className='w-25'  
                 required
                 value={editprofile?.address} 
-                onChange={(e)=>{setEditprofile({...editprofile,address:e.target.value})}}
+                onChange={(e)=>setEditprofile({...editprofile,address:e.target.value})}
                 type="text"
                 placeholder="Address"/> <br />
 

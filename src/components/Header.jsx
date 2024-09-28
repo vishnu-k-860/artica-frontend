@@ -5,11 +5,12 @@ import { Headercontext } from '../context/header'
 import { getfromcartApi } from '../services/appAPI'
 
 function Header() {
+
   const {header,setHeader} = useContext(Headercontext)
 
 
   const navigate = useNavigate()
- const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -25,9 +26,9 @@ function Header() {
   useEffect(()=>{
     const tokendata = sessionStorage.getItem('token')
     setToken(tokendata);
-    const username = JSON.parse(sessionStorage.getItem('user'))
-    setUser(username?.firstname)
-    setProfile(username?.profilepic)  
+     const username = JSON.parse(sessionStorage.getItem('user'))
+     setUser(username?.firstname)
+     setProfile(username?.profilepic)  
 
   },[header])
 
@@ -38,30 +39,22 @@ const Submitlogout = async()=>{
   navigate('/Login')
 }
 
-  useEffect(()=>{
-    productDisplay()
-   },[header])
+useEffect(() => {
+  productDisplay()
+}, [header,displayproduct])
 
+  const productDisplay = async () => {
+    const token = sessionStorage.getItem('token')
+    const user = JSON.parse(sessionStorage.getItem('user'))
 
-const productDisplay = async()=>{ 
-const token = sessionStorage.getItem('token')
-const user = JSON.parse(sessionStorage.getItem('user'))
-if(token){
-  var reqHeader = {
-      "Content-Type" : "application/json",
-    "Authorization" : `Bearer ${token}`
-  }
-
-const result = await getfromcartApi(user?._id,reqHeader)
-setDisplayproduct(result?.data?.items)
-  setCartcount( displayproduct?.length)
-
-}
-}
-
-
-
-
+    
+      const result = await getfromcartApi(user?._id)
+      if (result?.status === 200) {
+        setDisplayproduct(result?.data?.items)
+        setCartcount(displayproduct?.length)
+      } 
+      
+    }
 
   return (
     <div id="headerpart">
@@ -83,9 +76,9 @@ setDisplayproduct(result?.data?.items)
          {token ?(
            <>
          <Button style={{width:"100px",color:"black",marginRight:"10px"}} variant="outline-dark"  onClick={handleShow}>  {user} </Button>
-         <Button variant="outline-dark">
+        <Link to={'/Cart'}> <Button variant="outline-dark">
          Cart <Badge bg="dark">{cartcount}</Badge>
-    </Button>
+    </Button></Link>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
